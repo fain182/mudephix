@@ -6,30 +6,25 @@ namespace Acceptance;
 class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testCommandWithoutArguments() {
-        $fakeWriter = new FakeWriter();
-
-        $mudephix = new \Mudephix\Mudephix($fakeWriter);
-        $mudephix->run(__DIR__.'/fixtures/mdxfile.php', 'yell');
-
-        $this->assertEquals("FOO\n", $fakeWriter->getOutput());
+    public function testWithoutInputFile() {
+        $this->assertCommandOutputEquals('/fixtures/empty', "any_command", ["No mdxfile found."]);
     }
-    
-}
 
-class FakeWriter {
+    public function testCommandWithoutArgument() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "yell", ["FOO"]);
+    }
 
-    public function __construct()
+
+    //command not found
+    //command with argument
+    //dry-run
+
+    private function assertCommandOutputEquals($fixture, $command, $expected)
     {
-        $this->output = '';
+        $mdx = __DIR__ . '/../../bin/mudephix';
+        chdir(__DIR__ . $fixture);
+        exec($mdx . " " . $command, $output);
+        $this->assertEquals($expected, $output);
     }
 
-    public function write($string) {
-        $this->output .= $string;
-    }
-
-    public function getOutput()
-    {
-        return $this->output;
-    }
 }

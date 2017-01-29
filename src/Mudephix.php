@@ -2,18 +2,18 @@
 
 namespace Mudephix;
 
-
 class Mudephix
 {
+    const MDXFILE_PATH = './mdxfile.php';
 
-    public function __construct($writer)
-    {
-        $this->context = new Context($writer);
-    }
+    public function run($argv) {
+        if (! file_exists(self::MDXFILE_PATH)) {
+            echo "No mdxfile found.\n";
+            exit(1);
+        }
 
-    public function run($filePath, $command)
-    {
-        include($filePath);
-        $command($this->context);
+        include self::MDXFILE_PATH;
+        $commandName = $argv[1];
+        $commandName(new Context());
     }
 }
