@@ -10,14 +10,24 @@ class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
         $this->assertCommandOutputEquals('/fixtures/empty', "any_command", ["No mdxfile found."]);
     }
 
-    public function testCommandWithoutArgument() {
-        $this->assertCommandOutputEquals('/fixtures/simple', "yell", ["FOO"]);
+    public function testWrongCommandName() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "wrong_name", ["Command 'wrong_name' not found."]);
     }
 
+    public function testCommandWithoutArgument() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "yell", ["FOO!"]);
+    }
 
-    //command not found
-    //command with argument
-    //dry-run
+    public function testCommandWithArgument() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "yell asd", ["ASD!"]);
+    }
+
+    public function testCommandMissingMandatoryArgument() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "greet", ["Too few arguments."]);
+    }
+
+    // dry-run
+    // environments
 
     private function assertCommandOutputEquals($fixture, $command, $expected)
     {
