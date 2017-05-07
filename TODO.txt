@@ -1,0 +1,4 @@
+environments
+flag arguments (dry-run)
+local command
+remote command

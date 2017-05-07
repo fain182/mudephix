@@ -30,8 +30,15 @@ class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
         $this->assertCommandOutputEquals('/fixtures/simple', "", ["mdxfile - available commands:", "yell", "greet"]);
     }
 
-    // dry-run
-    // environments
+
+    public function testChooseEnvironment() {
+        $this->assertCommandOutputEquals('/fixtures/environments', "showUser --env=test", ["kea"]);
+    }
+
+    public function testMissingEnvironment() {
+        $this->assertCommandOutputEquals('/fixtures/environments', "showUser", ["Error: no environment specified"]);
+    }
+
 
     private function assertCommandOutputEquals($fixture, $command, $expected)
     {
