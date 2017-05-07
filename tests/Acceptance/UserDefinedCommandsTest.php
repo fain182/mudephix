@@ -26,6 +26,10 @@ class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
         $this->assertCommandOutputEquals('/fixtures/simple', "greet", ["Too few arguments."]);
     }
 
+    public function testListOfCommands() {
+        $this->assertCommandOutputEquals('/fixtures/simple', "", ["mdxfile - available commands:", "yell", "greet"]);
+    }
+
     // dry-run
     // environments
 

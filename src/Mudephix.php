@@ -12,7 +12,19 @@ class Mudephix
             exit(1);
         }
 
+        $definedFunctions = get_defined_functions();
         include self::MDXFILE_PATH;
+        $newDefinedFunction = get_defined_functions();
+
+        if (count($argv) < 2) {
+            $commands = array_diff($newDefinedFunction['user'], $definedFunctions['user']);
+            echo "mdxfile - available commands:\n";
+            foreach ($commands as $command) {
+                echo "$command\n";
+            }
+            exit(1);
+        }
+
         $commandName = $argv[1];
 
         if (!function_exists($commandName)) {
