@@ -31,7 +31,7 @@ class CommandList
         return $this->commands;
     }
 
-    public function execute($commandName, $arguments)
+    public function execute($commandName, $arguments, $options = [])
     {
         if (!function_exists($commandName)) {
             echo "Command '$commandName' not found.\n";
@@ -46,7 +46,10 @@ class CommandList
             exit(1);
         }
 
-        call_user_func_array($commandName, array_merge([new Context()], $arguments));
+        $environmentName = isset($options['env']) ? $options['env'] : '';
+        $context = new Context($environmentName);
+
+        call_user_func_array($commandName, array_merge([$context], $arguments));
 
     }
 }

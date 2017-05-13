@@ -21,6 +21,15 @@ class Mudephix
         $commandName = $argv[1];
         $arguments = array_slice($argv, 2);
 
-        $commandList->execute($commandName, $arguments);
+        $options = [];
+        for ($i = 0; $i < count($arguments); $i++) {
+            if (substr($arguments[$i], 0, 2) == '--') {
+                $optionString = substr($arguments[$i], 2);
+                list($name, $value) = explode('=', $optionString);
+                $options[$name] = $value;
+                unset($arguments[$i]);
+            }
+        }
+        $commandList->execute($commandName, $arguments, $options);
     }
 }

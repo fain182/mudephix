@@ -39,6 +39,10 @@ class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
         $this->assertCommandOutputEquals('/fixtures/environments', "showUser", ["Error: no environment specified"]);
     }
 
+    public function testMissingKeyInEnvironment() {
+        $this->assertCommandOutputEquals('/fixtures/environments', "missingKey --env=prod", ["Error: key ssh_params.NOT_EXISTS is missing in environment prod"]);
+    }
+
 
     private function assertCommandOutputEquals($fixture, $command, $expected)
     {
