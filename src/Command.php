@@ -18,7 +18,7 @@ class Command
 
     public function getName()
     {
-        return $this->argv[1];
+        return strtolower($this->argv[1]);
     }
 
     public function getArguments() {
@@ -38,6 +38,16 @@ class Command
             }
         }
         return $options;
+    }
+
+    public function getOption($name)
+    {
+        $options = $this->getOptions();
+        if (!isset($options[$name])) {
+            return null;
+        }
+
+        return $options[$name];
     }
 
 }

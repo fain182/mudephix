@@ -13,6 +13,7 @@ class Mudephix
         $command = new Command($argv);
         if ($command->isEmpty()) {
             $this->showAllCommands($taskList);
+            exit(1);
         }
 
         $taskList->execute($command);
@@ -24,6 +25,5 @@ class Mudephix
         foreach ($taskList->getAll() as $command) {
             echo "$command\n";
         }
-        exit(1);
     }
 }

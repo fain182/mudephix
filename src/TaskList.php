@@ -33,27 +33,14 @@ class TaskList
 
     public function execute(Command $command)
     {
-        $commandName = $command->getName();
-        $arguments = $command->getArguments();
-        $options = $command->getOptions();
-
-        if (!function_exists($commandName)) {
-            echo "Command '$commandName' not found.\n";
+        if (! in_array($command->getName(), $this->commands)) {
+            echo "Command '".$command->getName()."' not found.\n";
             exit(1);
         }
 
-        $fct = new \ReflectionFunction($commandName);
-        $parametersNumber = $fct->getNumberOfRequiredParameters();
+        $task = new Task($command);
+        $task->execute();
 
-        if (count($arguments) + 1 < $parametersNumber) {
-            echo "Too few arguments.\n";
-            exit(1);
-        }
-
-        $environmentName = isset($options['env']) ? $options['env'] : '';
-        $context = new Context($environmentName);
-
-        call_user_func_array($commandName, array_merge([$context], $arguments));
 
     }
 }
