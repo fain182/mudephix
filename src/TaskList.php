@@ -3,7 +3,7 @@
 namespace Mudephix;
 
 
-class CommandList
+class TaskList
 {
 
     public static function fromMdxFile($filePath)
@@ -31,8 +31,12 @@ class CommandList
         return $this->commands;
     }
 
-    public function execute($commandName, $arguments, $options = [])
+    public function execute(Command $command)
     {
+        $commandName = $command->getName();
+        $arguments = $command->getArguments();
+        $options = $command->getOptions();
+
         if (!function_exists($commandName)) {
             echo "Command '$commandName' not found.\n";
             exit(1);

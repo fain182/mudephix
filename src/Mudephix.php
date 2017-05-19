@@ -8,28 +8,22 @@ class Mudephix
 
     public function run($argv) {
 
-        $commandList = CommandList::fromMdxFile(self::MDXFILE_PATH);
+        $taskList = TaskList::fromMdxFile(self::MDXFILE_PATH);
 
-        if (count($argv) < 2) {
-            echo "mdxfile - available commands:\n";
-            foreach ($commandList->getAll() as $command) {
-                echo "$command\n";
-            }
-            exit(1);
+        $command = new Command($argv);
+        if ($command->isEmpty()) {
+            $this->showAllCommands($taskList);
         }
 
-        $commandName = $argv[1];
-        $arguments = array_slice($argv, 2);
+        $taskList->execute($command);
+    }
 
-        $options = [];
-        for ($i = 0; $i < count($arguments); $i++) {
-            if (substr($arguments[$i], 0, 2) == '--') {
-                $optionString = substr($arguments[$i], 2);
-                list($name, $value) = explode('=', $optionString);
-                $options[$name] = $value;
-                unset($arguments[$i]);
-            }
+    protected function showAllCommands(TaskList $taskList)
+    {
+        echo "mdxfile - available commands:\n";
+        foreach ($taskList->getAll() as $command) {
+            echo "$command\n";
         }
-        $commandList->execute($commandName, $arguments, $options);
+        exit(1);
     }
 }
