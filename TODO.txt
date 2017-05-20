@@ -1,12 +1,3 @@
-flag arguments (dry-run)
-local command
 remote command
-
-
-App: coordina oggetti
-Command: parsa l'input
-Task: esegue il task
-TaskRepository: sceglie il task
-Context: offre funzionalità al task
-Environment: dà le informazioni sull'ambiente
+flag arguments (dry-run)
 

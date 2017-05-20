@@ -1,9 +1,9 @@
 <?php
 
-namespace Acceptance;
+namespace Mudephix\Tests\Acceptance;
 
 
-class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
+class UserDefinedCommandsTest extends BaseCommandTestCase
 {
 
     public function testWithoutInputFile() {
@@ -28,28 +28,6 @@ class UserDefinedCommandsTest extends \PHPUnit_Framework_TestCase
 
     public function testListOfCommands() {
         $this->assertCommandOutputEquals('/fixtures/simple', "", ["mdxfile - available commands:", "yell", "greet"]);
-    }
-
-
-    public function testChooseEnvironment() {
-        $this->assertCommandOutputEquals('/fixtures/environments', "showUser --env=test", ["kea"]);
-    }
-
-    public function testMissingEnvironment() {
-        $this->assertCommandOutputEquals('/fixtures/environments', "showUser", ["Error: no environment specified"]);
-    }
-
-    public function testMissingKeyInEnvironment() {
-        $this->assertCommandOutputEquals('/fixtures/environments', "missingKey --env=prod", ["Error: key ssh_params.NOT_EXISTS is missing in environment prod"]);
-    }
-
-
-    private function assertCommandOutputEquals($fixture, $command, $expected)
-    {
-        $mdx = __DIR__ . '/../../bin/mudephix';
-        chdir(__DIR__ . $fixture);
-        exec($mdx . " " . $command, $output);
-        $this->assertEquals($expected, $output);
     }
 
 }
