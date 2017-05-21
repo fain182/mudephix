@@ -1,6 +1,6 @@
-machine:
-  timezone:
-    Europe/Rome
+dependencies:
+  pre:
+    - echo "date.timezone = Europe/Rome" > /opt/circleci/php/$(phpenv global)/etc/conf.d/timezone.ini
 
 test:
   override:
