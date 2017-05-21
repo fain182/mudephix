@@ -2,7 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/fain182/mudephix.svg?style=svg)](https://circleci.com/gh/fain182/mudephix)
 
-Mudephix is a little PHP task runner, that takes A LOT of inspiration from [Idephix](https://github.com/ideatosrl/Idephix).
+### Mudephix is a little PHP task runner, that takes A LOT of inspiration from [Idephix](https://github.com/ideatosrl/Idephix)
+
 It tries to take the good ideas from idephix, like:
  - define tasks like functions in php
  - simplify execution of local and remote command
@@ -44,7 +45,7 @@ function showFiles(\Mudephix\Context $context, $path='.') {
 }
 
 // you can call one task from another, exactly like you expected
-function showHomeDirecrories(\Mudephix\Context $context) {
+function showHome(\Mudephix\Context $context) {
     showFiles($context, "/home");
 }
 
@@ -82,4 +83,3 @@ return [
 
 You can call the task you want with the `--env` flag to identify the correct environment, so for example you can do something like:
 `mudephix deploy --env=production`
-
