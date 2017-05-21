@@ -37,4 +37,13 @@ class Context
         }
     }
 
+    public function remote($shellCommand)
+    {
+        $key = " -i ".$this->get('key')." ";
+        $target = $this->get('user') . "@" . $this->get('host') . " ";
+        $command = "ssh " .$key. $target ." ".escapeshellarg($shellCommand);
+        echo $command;
+        $this->local($command);
+    }
+
 }

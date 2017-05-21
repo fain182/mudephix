@@ -1,3 +1,5 @@
-remote command
-flag arguments (dry-run)
+README
+
+maybe:
+ - flag arguments (like --go in idephix)
 

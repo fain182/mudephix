@@ -14,4 +14,12 @@ class BaseCommandTestCase extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $output);
     }
 
+    public function assertCommandOutputContains($fixture, $command, $expected)
+    {
+        $mdx = __DIR__ . '/../../bin/mudephix';
+        chdir(__DIR__ . $fixture);
+        exec($mdx . " " . $command, $output);
+        $this->assertContains($expected, $output);
+    }
+
 }
