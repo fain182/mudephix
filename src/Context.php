@@ -6,7 +6,7 @@ namespace Mudephix;
 class Context
 {
 
-    private $environmentName;
+    private $environment;
 
     public function __construct($environmentName)
     {
