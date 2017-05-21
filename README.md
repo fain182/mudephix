@@ -1,6 +1,7 @@
 # Mudephix
 
-[![CircleCI](https://circleci.com/gh/fain182/mudephix.svg?style=svg)](https://circleci.com/gh/fain182/mudephix) [![Test Coverage](https://codeclimate.com/github/fain182/mudephix/badges/coverage.svg)](https://codeclimate.com/github/fain182/mudephix/coverage) [![Code Climate](https://codeclimate.com/github/fain182/mudephix/badges/gpa.svg)](https://codeclimate.com/github/fain182/mudephix)
+[![CircleCI](https://circleci.com/gh/fain182/mudephix.svg?style=svg)](https://circleci.com/gh/fain182/mudephix)
+[![Code Climate](https://codeclimate.com/github/fain182/mudephix/badges/gpa.svg)](https://codeclimate.com/github/fain182/mudephix)
 
 ### Mudephix is a little PHP task runner, that takes A LOT of inspiration from [Idephix](https://github.com/ideatosrl/Idephix)
 
