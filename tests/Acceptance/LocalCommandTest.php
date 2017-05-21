@@ -9,7 +9,7 @@ class LocalCommandTest extends BaseCommandTestCase
     }
 
     public function testLocalCommandFailureStopTheTask() {
-        $this->assertCommandOutputEquals('/fixtures/localCommand', "helloFailure", ["sh: WRONGCOMMAND: command not found", "ERROR in console command."]);
+        $this->assertCommandOutputContains('/fixtures/localCommand', "helloFailure", "ERROR in console command.");
     }
 
 }
