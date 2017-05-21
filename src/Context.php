@@ -10,17 +10,11 @@ class Context
 
     public function __construct($environmentName)
     {
-        $this->environmentName = $environmentName;
+        $this->environment = new Environment($environmentName, './mdxrc.php');
     }
 
     public function get($key) {
-        if (empty($this->environmentName)) {
-            echo 'Error: no environment specified';
-            exit(1);
-        }
-
-        $environment = new Environment($this->environmentName, './mdxrc.php');
-        return $environment->get($key);
+        return $this->environment->get($key);
     }
 
     public function writeln($string) {
@@ -39,11 +33,14 @@ class Context
 
     public function remote($shellCommand)
     {
-        $key = " -i ".$this->get('key')." ";
-        $target = $this->get('user') . "@" . $this->get('host') . " ";
-        $command = "ssh " .$key. $target ." ".escapeshellarg($shellCommand);
-        echo $command;
-        $this->local($command);
+        $sshCommand = "ssh ";
+        if ($this->environment->has('key')) {
+            $sshCommand .= " -i ".$this->get('key')." ";
+        }
+        $sshCommand .= $this->get('user') . "@" . $this->get('host') . " ";
+        $sshCommand .= escapeshellarg($shellCommand);
+
+        $this->local($sshCommand);
     }
 
 }

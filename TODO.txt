@@ -1,4 +1,7 @@
-README
+README:
+ - goals
+ - choices
+ - complete mdx example
 
 maybe:
  - flag arguments (like --go in idephix)

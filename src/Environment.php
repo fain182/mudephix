@@ -15,12 +15,31 @@ class Environment
         if ($this->environmentName != '') {
 
             if (! file_exists($filePath)) {
-                echo "Error: No mdxfile found.\n";
+                echo "Error: No mdxrc file found.\n";
                 exit(1);
             }
 
             $this->environments = include $filePath;
         }
+    }
+
+    public function has($key)
+    {
+        if (!isset($this->environments['envs'][$this->environmentName])) {
+            echo "Error: no environment found";
+            exit(1);
+        }
+        $environmentData = $this->environments['envs'][$this->environmentName];
+
+        $parts = explode('.', $key);
+        foreach($parts as $part) {
+            if (!isset($environmentData[$part])) {
+                return false;
+            }
+            $environmentData = $environmentData[$part];
+        }
+
+        return true;
     }
 
     public function get($key)

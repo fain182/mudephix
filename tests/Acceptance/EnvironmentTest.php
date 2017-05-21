@@ -13,7 +13,7 @@ class EnvironmentTest extends BaseCommandTestCase
     }
 
     public function testMissingEnvironment() {
-        $this->assertCommandOutputEquals('/fixtures/environments', "showUser", ["Error: no environment specified"]);
+        $this->assertCommandOutputEquals('/fixtures/environments', "showUser", ["Error: no environment found"]);
     }
 
     public function testMissingKeyInEnvironment() {
